@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+<h3 align="center">{{job.titlu}}</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>{{job.tip_job}}</td>
+            </tr>
+          <tr>
+            <td>{{job.facultatea}}</td>
+            </tr>
+          <tr>
+            <td>{{job.descriere}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      {% if current_user.calitatea == 'student'  %}
+      <a href="{{url_for('aplica', id=job.id)}}" type="submit" class="btn btn-primary btn-lg">Aplica</a>
+      {% endif %}
+    </div>
+
+
+{% endblock %}

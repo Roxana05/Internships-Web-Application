@@ -1,0 +1,222 @@
+.top_section{
+    height: 900px;
+}
+.Main{
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+/*CAUTARE*/
+
+.cautare_job{
+    margin: 100px 0 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    justify-items: center;
+    width: 70%;
+}
+.select_{
+    background: none;
+    width: 200px;
+    height: 55px;
+    font-size: 1.09rem;
+    color: #3471B8;
+    border: #3471B8 2px solid;
+    border-radius: 5px;
+    text-align: left;
+    padding: 17px 0 0 10px;
+}
+.select_ option{
+    color: #3471B8;
+    background-color: white;
+}
+#btn_cauta{
+    text-align: center;
+    background: #3471B8;
+    width: 200px;
+    height: 55px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.underline{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    color: #3471B8;
+    margin-bottom: 20px;
+    padding: 0 280px;
+}
+.underline:after{
+    content: '';
+    position: absolute;
+    background-color: #FBB900;
+    height: 3px;
+    width: 100%;
+    left: 0;
+    bottom: -10px;
+    transition: .5s ease-out;
+}
+
+.underline_galerie{
+    display: flex;
+    position: relative;
+    top: -40%;
+    color: #fff;
+    padding: 0 230px;
+}
+.underline_galerie:after{
+    content: '';
+    height: 3px;
+    width: 100%;
+    background: #FBB900;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: .5s ease-out;
+}
+
+/*PARTENERI*/
+
+.parteneri_container{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    margin-top: 25px;
+    margin-bottom: 60px;
+}
+.parteneri_container div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 220px;
+    border: 1px solid #333333;
+}
+
+
+@media screen and (max-width: 1045px) {
+    .parteneri_container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width: 760px) {
+    .parteneri_container{
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .parteneri_container > div >img{
+    width: 70%;
+    height: 70%;
+    border-radius: 5px;
+}
+}
+
+/*INTERNSHIPURI*/
+
+.internship_container{
+    width: 70%;
+    margin-bottom: 60px;
+}
+.internship_box{
+    --gap: 16px;
+    --num-cols: 4;
+    --row-height: 300px;
+
+    box-sizing: border-box;
+    padding: var(--gap);
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+}
+.internship_box > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: #606060 1px solid;
+}
+
+/*NOUTATI*/
+
+.news_container{
+    width: 70%;
+    margin-bottom: 60px;
+}
+.news_box{
+    --gap: 16px;
+    --num-cols: 1;
+    --row-height: 300px;
+
+    box-sizing: border-box;
+    padding: var(--gap);
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+}
+.news_box > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: #606060 1px solid;
+}
+.afisaTot{
+    color: #FBB900;
+    background: none;
+    border: none;
+    font-size: 28px;
+    margin-left: 15px;
+}
+
+/*GALERIE FOTO*/
+
+.galerie_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 430px;
+    background: #084371;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+/*ACTIVITATI*/
+
+
+.activitati_container{
+    width: 70%;
+    margin-bottom: 60px;
+}
+.activitati_box{
+    --gap: 16px;
+    --num-cols: 4;
+    --row-height: 300px;
+
+    box-sizing: border-box;
+    padding: var(--gap);
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-auto-rows: var(--row-height);
+    gap: var(--gap);
+}
+.activitati_box > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: #606060 1px solid;
+}

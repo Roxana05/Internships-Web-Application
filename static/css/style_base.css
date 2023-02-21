@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+*,::before,::after{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Poppins', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-image: url("../images/Desktop-UVT-1440-X-900.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    max-width: 100%;
+}
+.base_container{
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 1;
+    margin-top: 70px;
+    /*min-height: 100%;*/
+    background-color: #fff;
+}
+
+/* BASE.HTML NAVBAR */
+
+nav{
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 70px;
+    padding: 0 1.5em;
+    display: flex;
+    align-items: center;
+    transition: .3s ease-out;
+}
+.active_nav{
+    background-color: #001C38;
+    transition: .3s ease-in;
+}
+nav .logo img{
+    height: 45px;
+}
+nav .nav-links{
+    position: absolute;
+    right: 12.5em;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+nav .redirect{
+    display: inline-block;
+}
+nav .redirect > a{
+    display: inline-block;
+    padding: 0 1.5em;
+    line-height: 70px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 650;
+}
+nav .user_icon{
+    color: white;
+}
+nav .dropdown{
+    position: relative;
+    right: -6.5em;
+    font-size: 22px;
+    cursor: pointer;
+}
+nav .dropdown a::after{
+    content: '';
+    display: inline-block;
+    margin-left: .5em;
+    vertical-align: middle;
+    border-top: .3em solid #fff;
+    border-right: .3em solid transparent;
+    border-left: .3em solid transparent;
+}
+nav .dropdown.show a::after{
+    transform: rotate(180deg);
+    /*display: none;*/
+}
+nav .dropdown_menu{
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: .5em 0;
+    margin-top: -.5em;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: .5em;
+    background-color: #fff;
+}
+nav .dropdown.show .dropdown_menu{
+    display: block;
+    width: 130px;
+    padding: .5em 0;
+}
+nav .dropdown_item{
+    display: block;
+    padding: 0 1.5em;
+    font-size: .875em;
+    color: #000000;
+    line-height: 0.5;
+    text-decoration: none;
+}
+nav .btn-hamburger{
+    display: none;
+    position: absolute;
+    right: 1.5em;
+    top: 50%;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    transform: translateY(-50%);
+}
+nav .btn-hamburger span{
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px;
+    border-radius: 2px;
+    transition: .3s ease-in-out;
+}
+nav .btn-hamburger span:nth-child(4),
+nav .btn-hamburger span:nth-child(5){
+    position: absolute;
+    top: 10px;
+    opacity: .5;
+}
+nav .btn-hamburger span:nth-child(4){
+    transform: rotate(45deg) scale(0);
+}
+nav .btn-hamburger span:nth-child(5){
+    transform: rotate(-45deg) scale(0);
+}
+nav.opened .btn-hamburger span:nth-child(4){
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+}
+nav.opened .btn-hamburger span:nth-child(5){
+    opacity: 1;
+    transform: rotate(-45deg) scale(1);
+}
+nav.opened .btn-hamburger span:nth-child(1),
+nav.opened .btn-hamburger span:nth-child(2),
+nav.opened .btn-hamburger span:nth-child(3){
+    opacity: 0;
+
+}
+@media screen and (max-width: 1189px) {
+    nav .nav-links{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 70px;
+        bottom: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #363a43;
+        transition: bottom .5s ease-in-out;
+        overflow: hidden;
+    }
+    nav.opened .nav-links{
+        bottom: 0;
+    }
+    .nav .redirect > a{
+        display: block;
+    }
+    nav .dropdown_menu{
+        position: relative;
+        top: 0;
+        margin: 0 1.5em;
+    }
+    nav .btn-hamburger{
+        display: block;
+    }
+    nav .dropdown{
+        right: 0;
+    }
+}
+
+
+/* BASE.HTML FOOTER */
+
+footer .container{
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.footer_col_items{
+    list-style: none;
+}
+.footer{
+    background-color: #001C38;
+}
+.footer_col{
+    width: 27%;
+    padding: 0 15px;
+    margin: 45px 0 0 0;
+}
+.footer_col h4{
+    font-size: 18px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    position: relative;
+}
+.footer_col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+.footer_col ul{
+    margin: 0 0 0 -30px;
+}
+.footer_col ul li a{
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+.footer_col ul li a:hover{
+    color: #ffffff;
+    padding-left: 8px;
+}
+.footer_col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+.footer_col .social-links a:hover{
+    color: #24262b;
+    background-color: #fff;
+}
+
+@media(max-width: 767px) {
+    .footer_col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+@media(max-width: 574px) {
+    .footer_col{
+        width: 100%;
+    }
+}
+
+/* SCROLL TOP */
+.scrolltop{
+    position: fixed;
+    right: 1rem;
+    bottom: -20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .3rem;
+    background-color: var(--container-color-alt);
+    border-radius: .4rem;
+    z-index: var(--z-tooltip);
+    transition: .4s;
+    visibility: hidden;
+}
+.scrolltop .scrolltop_icon{
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+.scrolltop.show-scroll{
+    visibility: visible;
+    bottom: 5rem;
+}

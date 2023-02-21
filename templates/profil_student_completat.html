@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} Profil Student {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+  <div>
+    <ul class="nav-links_sc">
+      <li class="redirectt"><a href="/profilCV/{{userStudent.id}}" class="profilecv">Curriculum Vitea</a></li>
+      <li class="redirectt"><a href="/profil" class="profilecv">Profile</a></li>
+    </ul>
+  </div>
+    <h3>Profil {{userStudent.nume}} {{userStudent.prenume}}</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Username: </th>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Nume: </th>
+            <td>{{userStudent.nume}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Prenume: </th>
+            <td>{{userStudent.prenume}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Facultatea: </th>
+            <td>{{userStudent.facultatea}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Studii: </th>
+            <td>{{userStudent.studii}}</td>
+          </tr>
+          <tr>
+            <th scope="row">An studii: </th>
+            <td>{{userStudent.an_studii}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Telefon: </th>
+            <td>{{userStudent.telefon}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email: </th>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr>
+            <th scope="row">CV: </th>
+            <td>{{userStudent.fisier}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="{{url_for('update', id=userStudent.id)}}" type="submit" class="btn btn-primary">Modifica profil</a>
+      <a href="{{url_for('delete', id=current_user.id)}}" type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Remove?');">Sterge utilizator</a>
+    </div>
+
+
+{% endblock %}

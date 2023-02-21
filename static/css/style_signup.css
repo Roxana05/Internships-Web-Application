@@ -1,0 +1,37 @@
+.signup_container{
+    height: 800px;
+    display: grid;
+    place-items: center;
+    max-width: 100%;
+}
+
+.signup_form{
+    width: 35%;
+    height: 550px;
+    position: relative;
+    right: 23%;
+    top: -4%;
+    background-color: #ffff;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0),
+    0 -32px 32px -32px rgba(0,0,0,0);
+}
+.signup_form h3{
+    margin-top: 20px;
+    color: #3471B8;
+}
+.signup_form-group{
+    width: 75%;
+    margin-bottom: 20px;
+}
+.signup_form .btn{
+    margin-bottom: 20px;
+}
+.signup_form div input::placeholder{
+    color: #3471B8;
+}
+.signup_form div select{
+    color: #3471B8;
+}

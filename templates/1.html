@@ -1,0 +1,119 @@
+<div class="left-side">
+    <div class="profileText">
+
+        <div class="imgBox">
+            <img id="selectedPhoto" name="selectedPhoto" src="{{url_for('display_foto')}}" alt="">
+        </div>
+        <h2 id="getname" name="getname">Ramos Ivanilson</h2><br><span>Last year grade: {{userStudent.grade}}</span><span id="getgrade" name="getgrade"></span>
+
+    </div>
+    <div class="contactInfo">
+        <h3 class="title">Contact Info</h3>
+        <ul>
+            <li>
+                <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <span class="text" id="ctn_number">{{userStudent.telefon}}</span>
+            </li>
+
+            <li>
+                <span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                <span class="text" id="ctn_email">{{user.email}}</span>
+            </li>
+            
+            <li>
+                <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                <span class="text" id="ctn_address">{{userStudent.adresa}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="contactInfo education">
+        <h3 class="title">Education</h3>
+        <ul>
+            {% for e in edu %}
+                <li>
+                    <h5>{{e.start}} - {{e.graduation}}</h5>
+                    <h4>{{e.institution}}</h4>
+                    <h4>{{e.specialization}}</h4>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="contactInfo language">
+        <h3 class="title">Languages</h3>
+        <ul>
+            {% for l in lang %}
+                <li>
+                    <span class="text">{{l.language}}</span>
+                    <span class="percent">
+                        {% if l.level == '50' %}
+                            <div style="width: 50%;"></div>
+                        {% elif l.level == '70' %}
+                            <div style="width: 70%;"></div>
+                        {% elif l.level == '90' %}
+                            <div style="width: 90%;"></div>
+                        {% else %}
+                            <div style="width: 100%;"></div>
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<div class="right-side">
+    
+    <div class="about">
+        <h2 class="title2">About me</h2>
+        <p id="aboutmeText" name="aboutmeText">{{userStudent.aboutme}}</p>
+    </div>
+    
+    <div class="about">
+        <h2 class="title2">Experience</h2>
+        {% for e in exp %}
+            <div class="Box">
+                <div class="year_company">
+                    <h5>{{e.start}} - {{e.finish}}</h5>
+                    <h5>{{e.company}}</h5>
+                </div>
+                <div class="text">
+                    <h4>{{e.position}}</h4>
+                    <p>{{e.description}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="about skills">
+        <h2 class="title2">Professional Skills</h2>
+        {% for s in skills %}
+            <div class="Box">
+                <h4>{{s.skill}}</h4>
+                <div class="percent">
+                    {% if s.level == '50' %}
+                        <div style="width: 50%;"></div>
+                    {% elif s.level == '70' %}
+                        <div style="width: 70%;"></div>
+                    {% elif s.level == '90' %}
+                        <div style="width: 90%;"></div>
+                    {% else %}
+                        <div style="width: 100%;"></div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="about hobbies">
+        <h2 class="title2">Hobbies</h2>
+        <ul>
+            <li><i class="fa fa-gamepad" aria-hidden="true"></i> Gaming</li>
+            <li><i class="fa fa-book" aria-hidden="true"></i> Reading</li>
+            <li><i class="fa fa-cutlery" aria-hidden="true"></i> Cooking</li>
+            <li><i class="fa fa-microphone" aria-hidden="true"></i> Singing</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %} Sign Up {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+
+<form method="POST">
+    <h3 align="center">Adauga job</h3>
+    <br/>
+    {{ form.hidden_tag() }}
+    {{ form.titlu.label(class="form-label") }}
+    {{ form.titlu(class="form-control", placeholder="Introduceti titlul job-ului") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.descriere.label(class="form-label") }}
+    {{ form.descriere(class="form-control", rows="5", placeholder="Introduceti descrierea job-ului") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.tip_job.label(class="form-label") }}
+    {{ form.tip_job(class="form-select form-select-sm") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.facultatea.label(class="form-label") }}
+    {{ form.facultatea(class="form-select form-select-sm") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.tag.label(class="form-label") }}
+    {{ form.tag(class="form-control", placeholder="Introduceti tag-ul") }}
+
+    <br>
+
+    
+
+    <br/>
+    {{ form.submit(class="btn btn-secondary") }}
+
+    
+  </form>
+  <br><br><br>
+
+
+
+
+
+{% endblock %}

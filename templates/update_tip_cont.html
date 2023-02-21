@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Profil Student {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+<h3 align="center">Profil {{user_to_update.usernume}}</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Username: </th>
+                    <td>{{user_to_update.username}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email: </th>
+                    <td>{{user_to_update.email}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+<form method="POST" enctype=multipart/form-data>
+    <div class="form-group">
+        <label for="calitatea">Alege:</label>
+        <select class="form-select form-select-sm" id="calitatea" name="calitatea">
+            <option selected value="student">Student</option>
+            <option value="profesor">Profesor</option>
+            <option value="companie">Companie</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+  </form>
+
+
+{% endblock %}

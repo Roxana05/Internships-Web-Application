@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %} Profil Profesor {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+
+<form method="POST" enctype=multipart/form-data>
+    <h3 align="center">Modificare Profil {{userProfesor.nume}} {{userProfesor.prenume}}</h3>
+    <div class="form-group">
+      <label for="nume">Nume</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nume"
+        name="nume"
+        value="{{user.nume}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="prenume">Prenume</label>
+      <input
+        type="text"
+        class="form-control"
+        id="prenume"
+        name="prenume"
+        value="{{user.prenume}}"
+      />
+    </div>
+    <div class="form-group">
+        <label for="facultatea">Facultatea:</label>
+        <select class="form-select form-select-sm" id="facultatea" name="facultatea">
+            <option selected >Facultatea</option>
+            <option value="fmi">FMI</option>
+            <option value="feaa">FEAA</option>
+        </select>
+    </div>
+    
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+  </form>
+
+
+{% endblock %}

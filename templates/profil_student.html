@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %} Profil Student {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+
+<form method="POST", enctype="multipart/form-data">
+    <h3 align="center">Profil Student</h3>
+    <div class="form-group">
+      <label for="nume">Nume</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nume"
+        name="nume"
+        placeholder="Introduceti numele"
+      />
+    </div>
+    <div class="form-group">
+      <label for="prenume">Prenume</label>
+      <input
+        type="text"
+        class="form-control"
+        id="prenume"
+        name="prenume"
+        placeholder="Introduceti prenumele"
+      />
+    </div>
+    <div class="form-group">
+        <label for="facultatea">Facultatea:</label>
+        <select class="form-select form-select-sm" id="facultatea" name="facultatea">
+            <option selected >Facultatea</option>
+            <option value="fmi">FMI</option>
+            <option value="feaa">FEAA</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="studii">Studii:</label>
+        <select class="form-select form-select-sm" id="studii" name="studii">
+            <option selected >Studii</option>
+            <option value="licenta">Licenta</option>
+            <option value="master">Master</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="anStudii">Anul de studii</label>
+      <input
+        type="text"
+        class="form-control"
+        id="anStudii"
+        name="anStudii"
+        placeholder="Introduceti anul de studii"
+      />
+    </div>
+    <div class="form-group">
+      <label for="telefon">Telefon</label>
+      <input
+        type="text"
+        class="form-control"
+        id="telefon"
+        name="telefon"
+        placeholder="Introduceti numarul de telefon"
+      />
+    </div>
+
+    <p>CV:</p>
+    <div class="custom-file mb-3">
+      <input type="file" class="custom-file-input" id="cv" name="file">
+    </div>
+    
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="{{url_for('updateTipCont', id=current_user.id)}}" type="submit" class="btn btn-primary">Modifica tip cont</a>
+      <a href="{{url_for('delete', id=current_user.id)}}" type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Remove?');">Sterge utilizator</a>
+  </form>
+
+
+{% endblock %}

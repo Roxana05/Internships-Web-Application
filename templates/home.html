@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<section class="top_section">
+
+</section>
+<section class="Main">
+    <div class="cautare_job">
+        <label class="label_select">
+            <select class="select_">
+                <option selected hidden>TIP DE JOB</option>
+                <option>Part-Time</option>
+                <option>Internship</option>
+                <option>Full Time</option>
+            </select>
+        </label>
+        <label class="label_select">
+            <select class="select_">
+                <option selected hidden>DOMENIU</option>
+                <option value="5">Arhitectură și Urbanism</option>
+                <option value="3">Automatica si Calculatoare</option>
+                <option value="4"> Electronică, Telecomunicații si Tehnologii Informaționale</option>
+                <option value="6">Chimie Industrială si Ingineria Mediului</option>
+                <option value="10">Construcții</option>
+                <option value="13">Electrotehnică și Electroenergetică</option>
+                <option value="9">Inginerie Hunedoara</option>
+                <option value="11">Științele Comunicării</option>
+                <option value="8">Mecanică</option>
+                <option value="14">Management în Producție și Transporturi</option>
+                <option value="37">Altele</option>
+            </select>
+        </label>
+        <label class="label_select">
+            <select class="select_">
+                <option selected hidden>LOCALITATE</option>
+                <option value="Timisoara">Timisoara</option>
+                <option value="Resita">Resita</option>
+                <option value="Caransebes">Caransebes</option>
+                <option value="Deva">Deva</option>
+                <option value="Hunedoara">Hunedoara</option>
+                <option value="Arad">Arad</option>
+                <option value="Oradea">Oradea</option>
+                <option value="Cluj">Cluj</option>
+                <option value="Satu-Mare">Satu-Mare</option>
+                <option value="Bucuresti">Bucuresti</option>
+                <option value="Lugoj">Lugoj</option>
+            </select>
+        </label>
+        <button id="btn_cauta">CAUTA</button>
+    </div>
+
+    <div><h2 class="underline">Parteneri</h2></div>
+    <div class="parteneri_container contain">
+        <div class="parteneri_box" ><img src="../static/companies/1.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/2.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/3.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/4.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/5.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/6.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/7.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/8.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/9.png" alt=""></div>
+        <div class="parteneri_box" ><img src="../static/companies/10.png" alt=""></div>
+    </div>
+
+    <div><h2 class="underline">Internshipuri</h2></div>
+    <div class="internship_container contain">
+        <div class="internship_box">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+        </div>
+    </div>
+
+    <div><h2 class="underline">Noutati</h2></div>
+    <div class="news_container contain">
+        <div class="news_box">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+        </div>
+        <div>
+            <button class="afisaTot">Afisati tot...</button>
+        </div>
+    </div>
+
+    <div class="galerie_container contain">
+        <h2 class="underline_galerie">Galerie Foto</h2>
+        <div>
+            <div class="galerie_foto_slide">
+
+            </div>
+        </div>
+    </div>
+
+    <div><h2 class="underline">Activitati</h2></div>
+    <div class="activitati_container contain">
+        <div class="activitati_box">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+            <img src="../static/FMI-12.png" alt="">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

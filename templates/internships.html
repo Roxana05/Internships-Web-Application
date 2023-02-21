@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+<div>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Titlu</th>
+        <th scope="col">Descriere</th>
+        <th scope="col">Tipul Job-ului</th>
+        <th scope="col">Facultatea</th>
+        <th scope="col">Tag</th>
+        <th scope="col">Vizualizeaza</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for job in jobs %}
+      <tr>
+        <td scope="row">{{job.titlu}}</td>
+        <td>{{job.descriere[:200]}}</td>
+        <td>{{job.tip_job}}</td>
+        <td>{{job.facultatea}}</td>
+        <td>{{job.tag}}</td>
+        <td> 
+            <a href="{{url_for('job', id=job.id)}}" type="submit" class="btn btn-outline-secondary btn-sm">Vizualizeaza</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

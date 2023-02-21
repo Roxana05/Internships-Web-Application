@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %} Profil Companie {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+
+<form method="POST" enctype=multipart/form-data>
+    <h3 align="center">Modificare Profil {{user.nume_companie}}</h3>
+    <div class="form-group">
+      <label for="nume">Denumire Companie</label>
+      <input
+        type="text"
+        class="form-control"
+        id="denumire"
+        name="denumire"
+        value="{{user.nume_companie}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="adresa">Adresa companiei:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="adresa"
+        name="adresa"
+        value="{{user.adresa}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="web">Adresa web:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="web"
+        name="web"
+        value="{{user.adresa_web}}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="telefon">Telefon</label>
+      <input
+        type="text"
+        class="form-control"
+        id="telefon"
+        name="telefon"
+        value="{{user.telefon}}"
+      />
+    </div>
+    <div class="form-group">
+        <label for="descriere">Descriere companie</label>
+        <textarea 
+          class="form-control" 
+          name="descriere" 
+          id="descriere" 
+          cols="30" 
+          rows="10" 
+          >{{user.descriere_companie}}</textarea>
+    <br>
+    <p>Logo:</p>
+    <div class="custom-file mb-3">
+      <input type="file" class="custom-file-input" id="logo" name="fisier">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+  </form>
+
+
+{% endblock %}

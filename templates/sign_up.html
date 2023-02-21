@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} Sign Up {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+
+<form method="POST">
+    <h3 align="center">Sign up</h3>
+    <br/>
+    {{ form.hidden_tag() }}
+    {{ form.email.label(class="form-label") }}
+    {{ form.email(class="form-control", placeholder="Introduceti adresa de email") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.username.label(class="form-label") }}
+    {{ form.username(class="form-control", placeholder="Introduceti username-ul") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.password1.label(class="form-label") }}
+    {{ form.password1(class="form-control", placeholder="Introduceti parola") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.password2.label(class="form-label") }}
+    {{ form.password2(class="form-control", placeholder="Confirmati parola") }}
+
+    {{ form.hidden_tag() }}
+    {{ form.calitatea.label(class="form-label") }}
+    {{ form.calitatea(class="form-select form-select-sm") }}
+
+    <br>
+
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="gdpr" id="flexCheckDefault" name="gdpr">
+      <label class="form-check-label" for="flexCheckDefault">
+        GDPR
+      </label>
+    </div>
+
+    <br/>
+    {{ form.submit(class="btn btn-secondary") }}
+
+    
+  </form>
+  <br><br><br>
+
+
+
+
+
+{% endblock %}

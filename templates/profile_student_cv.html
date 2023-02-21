@@ -1,0 +1,922 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<div class="cv_container1_" id="cv_container1_">
+
+    <form action="/update_foto/{{ userStudent.id }}" class="addInfo blur" method="POST" enctype=multipart/form-data>
+        <label for="default-btn" >
+            <input type="file" id="default-btn" name="poza" hidden>
+            <a href="#" class="addInformation" id="pic" onclick="defaultBtnActive()">PHOTO</a>
+            <input type="submit" value="SAVE">
+        </label>
+        <label for="grade">
+            <a class="addInformation" id="grade" name="grade" onclick="togglegrade()">Last year grade</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="togglegrade()">
+        </label>
+        <label for="contact_info">
+            <a href="#" class="addInformation" id="contact_info" name="contact_info" onclick="togglecontact()">Contact</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="togglecontact()">
+        </label>
+        <label for="education">
+            <a href="#" class="addInformation" id="education" name="education" onclick="toggleedu()">Education</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="toggleedu()">
+        </label>
+        <label for="language">
+            <a href="#" class="addInformation" id="language" name="language" onclick="togglelang()">Languages</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="togglelang()">
+        </label>
+        <label for="aboutme">
+            <a href="#" class="addInformation" id="aboutme" name="aboutme" onclick="toggleabout()">About me</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="toggleabout()">
+        </label>
+        <label for="experience">
+            <a href="#" class="addInformation" id="experience" name="experience" onclick="toggleexp()">Experience</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="toggleexp()">
+        </label>
+        <label for="skills">
+            <a href="#" class="addInformation" id="skills" name="skills" onclick="toggleskills()">Profesional Skills</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="toggleskills()">
+        </label>
+        <label for="hobbie">
+            <a href="#" class="addInformation" id="hobbie" name="hobbie" onclick="togglehobbies()">Hobbies</a>
+            <img src="/static/images/plus-regular-24.png" alt="" onclick="togglehobbies()">
+        </label>
+    </form>
+
+    <main class="l-main bd-container blur" id="lmain">
+        <!-- All elements within this div, is generated in PDF -->
+        <div class="resume" id="area-cv">
+            <div class="resume__left">
+                <!--========== HOME ==========-->
+                <section class="home" id="home">
+
+                    <div class="home_container section bd-grid">
+                        <div class="home_data bd-grid">
+                            <img src="{{url_for('display_foto')}}" alt="" class="home_img">
+                            <h1 class="home_title" id="student_name">{{userStudent.nume}} <b>{{userStudent.prenume}}</b></h1>
+                            <h3 class="home_grade">Last year grade: {{userStudent.grade}}</h3>
+
+                            <!-- Button to generate and download the pdf. Available for desktop. -->
+                            <!-- <div>
+                                <a download="" href="../static/assets/resume.pdf" class="home_button-movil">Download</a>
+                            </div> -->
+                        </div>
+
+                        <div class="home_address bd-grid">
+                            <h3 class="section-title">Contact</h3>
+                            <span class="home_information">
+                                <i class='bx bx-map home_icon'></i> {{userStudent.adresa}}
+                            </span>
+                            <span class="home_information">
+                                <i class='bx bx-envelope home_icon'></i> {{user.email}}
+                            </span>
+                            <span class="home_information">
+                                <i class='bx bx-phone home_icon'></i> {{userStudent.telefon}}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Theme change button -->
+                    <img src="../static/images/moon-solid-24(1).png" class='change-theme' title="theme" id="theme-button">
+                    <!-- Button to generate and download the pdf -->
+                    <img src="../static/images/download-regular-24.png" class="generate-pdf" title="Generate PDF" id="resume-button" alt="">
+
+                </section>
+
+                <!--========== SOCIAL ==========-->
+                <!-- <section class="social section">
+                    <h2 class="section-title">SOCIAL</h2>
+
+                    <div class="social_container db-grid">
+                        <a href="https://www.linkedin.com/" target="_blank" class="social_link">
+                            <i class='bx bxl-linkedin-square social_icon'></i> @ramosivanilson
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="social_link">
+                            <i class='bx bxl-github social_icon'></i> @ramosivanilson
+                        </a>
+                    </div>
+                </section> -->
+
+
+                <!--========== EDUCATION ==========-->
+                <section class="education section" id="">
+                    <h2 class="section-title">EDUCATION</h2>
+
+                    <div class="education_container bd-grid">
+                        {% for e in edu %}
+                            <input type="text" value="{{ e.id }}}" id="eduID" hidden>
+                            <div class="education_content">
+                                <div class="education_time">
+                                    <span class="education_rounder"></span>
+                                    <span class="education_line"></span>
+                                </div>
+
+                                <div class="education_data bd-grid">
+                                    <h3 id="education_title_{{ e.id }}" class="education_title">{{e.specialization}}</h3>
+                                    <span id="education_studies_{{ e.id }}" class="education_studies">{{e.institution}}</span>
+                                    <span id="education_year_{{ e.id }}" class="education_year">{{e.start}} / {{e.graduation}}</span>
+                                </div>
+                                <button type="button" class="edit" onclick="editEducation({{ e.id }}, {{userStudent.id}})"><img src="/static/images/edit-alt-solid-24(1).png" alt=""></button>
+                                <button type="button" class="close" onclick="deleteEducation({{ e.id }}, {{userStudent.id}})"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </section>
+
+                <!--========== LANGUAGES ==========-->
+                <section class="languages section">
+                    <h2 class="section-title">Languages</h2>
+
+                    <div class="languages_container">
+                        {% for l in lang %}
+                            <div class="languages_content bd-grid">
+                                <div class="languages_name">
+                                    <span class="languages_circle"></span> {{l.language}}
+                                    <div class="percent">
+                                        {% if l.level == '50' %}
+                                            <div style="width: 50%;"></div>
+                                        {% elif l.level == '70' %}
+                                            <div style="width: 70%;"></div>
+                                        {% elif l.level == '90' %}
+                                            <div style="width: 90%;"></div>
+                                        {% else %}
+                                            <div style="width: 100%;"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <button type="button" class="close" onclick="deleteLanguage({{ l.id }}, {{userStudent.id}})"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="resume__right">
+
+                <!--========== PROFILE ==========-->
+                <section class="profile section" id="profile">
+                    <h2 class="section-title">About me</h2>
+
+                    <p class="profile_description">{{userStudent.aboutme}}</p>
+                </section>
+
+                <!--========== EXPERIENCE ==========-->
+                <section class="experience section">
+                    <h2 class="section-title">Experience</h2>
+
+                    <div class="experience_container bd-grid">
+                        {% for e in exp %}
+                            <div class="experience_content">
+
+                                <div class="experience_time">
+                                    <span class="experience_rounder"></span>
+                                    <span class="experience_line"></span>
+                                </div>
+                                <button type="button" class="edit" onclick="editExperience({{ e.id }}, {{userStudent.id}})"><img src="/static/images/edit-alt-solid-24(1).png" alt=""></button>
+                                <button type="button" class="close" onclick="deleteExperience({{ e.id }}, {{userStudent.id}})"><span aria-hidden="true">&times;</span></button>
+                                <div class="experience_data bd-grid">
+                                    <h3  id="experience_title_{{ e.id }}" class="experience_title">{{e.position}}</h3>
+                                    <span id="experience_company_{{ e.id }}" class="experience_company">{{e.company}}: {{e.start}} / {{e.finish}}</span>
+                                    <p id="experience_description_{{ e.id }}" class="experience_description">{{e.description}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+
+                <!--========== SKILLS  ==========-->
+                <section class="skills section">
+                    <h2 class="section-title">Skills</h2>
+                    <div class="skills_container bd-grid">
+                        {% for s in skills %}
+                        <div class="skills_content">
+                            <div class="skills_data">
+                                <div class="skills_name">
+                                    <span class="skills_circle"></span> {{s.skill}}
+                                    <div class="percent">
+                                        {% if s.level == '50' %}
+                                            <div style="width: 50%;"></div>
+                                        {% elif s.level == '70' %}
+                                            <div style="width: 70%;"></div>
+                                        {% elif s.level == '90' %}
+                                            <div style="width: 90%;"></div>
+                                        {% else %}
+                                            <div style="width: 100%;"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="close" onclick="deleteSkills({{ s.id }}, {{userStudent.id}})"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!--========== CERTIFICATES ==========-->
+                <!-- <section class="certificate section" id="certificates">
+                    <h2 class="section-title">Certificates</h2>
+                    <div class="certificate_container">
+                        {% for c in certificates %}
+                            <div class="certificate_content">
+                                <h3 class="certificate_title">{{c.title}}</h3>
+                                <p class="certificate_description">{{c.description}}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section> -->
+
+                <!--========== INTERESTS ==========-->
+                <section class="interests section">
+                    <h2 class="section-title hobbie_s">Interests</h2>
+
+                    <div class="interests_container bd-grid">
+                        {% for h in hobbies %}
+                            <div class="interests_content">
+                                <i class='bx bx-headphone interests_icon' ></i>
+                                <span class="interests_name">{{h.hobbie}}</span>
+                            </div>
+                            <button type="button" class="close" onclick="deleteHobbies({{ h.id }}, {{userStudent.id}})"><span aria-hidden="true">&times;</span></button>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+
+
+    <!--========== POPUPS ==========-->
+    <form action="/update_grade/{{ userStudent.id }}" id="popupgrade" method="POST">
+        <h3>Grade Average</h3>
+        <div>
+            <h6>Grade average</h6>
+            <input type="text" name="gradeAvg" id="gradeAvg" value="{{userStudent.grade}}" placeholder="Grade">
+        </div>
+        <div id="buttons">
+            <button type="button" id="cancelBtn" name="cancelBtn" onclick="togglegrade()">Cancel</button>
+            <button type="submit" id="submitgrade" name="submitgrade" onclick="">Edit grade</button>
+        </div>
+    </form>
+
+    <form id="popupcontact" method="POST" action="/update_contact/{{ userStudent.id }}">
+        <h3>Contact Info</h3>
+        <div id="contactdiv">
+            <h6>Contact Info</h6>
+            <div><input type="text" name="phoneNumber" id="phoneNumber" value="{{userStudent.telefon}}" placeholder="Phone number"></div>
+            <div><input type="text" name="cnt_address" id="cnt_address" value="{{userStudent.adresa}}" placeholder="Address"></div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="togglecontact()">Cancel</button>
+            <button type="submit" id="submitcontactinfo" name="submitcontactinfo">Edit contact</button>
+        </div>
+    </form>
+
+    <form action="/add_education/{{ userStudent.id }}" id="popupeducation" method="POST">
+        <h3>Add Education</h3>
+        <div id="edu_">
+            <div id="edu_year">
+                Started at: <input type="date" id="startyear" name="startyear">
+                Graduated at: <input type="date" id="graduationyear" name="graduationyear">
+                <input type="checkbox" id="ongoing" value="Ongoing" name="ongoing" onclick="EnableDisable(this)"> Ongoing
+            </div>
+            <div id="eduinstitution">
+                <input type="text" id="institution" name="institution" placeholder="Institution">
+            </div>
+            <div id="eduspecialization">
+                <input type="text" id="specialization" name="specialization" placeholder="Specialization">
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleedu()">Cancel</button>
+            <button type="submit" class="submitedu" name="submitgrade">Add Education</button>
+        </div>
+    </form>
+
+    <form action="/update_education/{{ userStudent.id }}" id="popupeducationEdit" method="POST">
+        <input type="text" id="geteduID" hidden>
+        <h3>Edit Education</h3>
+        <div>
+            <div>
+                Started at: <input type="date" id="startyear_edit" name="startyear_edit">
+                Graduated at: <input type="date" id="graduationyear_edit" name="graduationyear_edit">
+                <input type="checkbox" id="edu_ongoing_edit" value="Ongoing" name="ongoing" onclick="EnableDisableEdu(this)"> Ongoing
+            </div>
+            <div>
+                <input type="text" id="institution_edit" name="institution_edit" placeholder="Institution">
+            </div>
+            <div>
+                <input type="text" id="specialization_edit" name="specialization_edit" placeholder="Specialization">
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleeduEdit()">Cancel</button>
+            <button type="submit" id="submitedu" name="submitgrade">Edit Education</button>
+        </div>
+    </form>
+
+    <form action="/add_language/{{ userStudent.id }}" id="popupslang" method="POST">
+        <h3>Languages</h3>
+        <div id="lang_">
+            <h6>Languages</h6>
+            <ul>
+                <li></li>
+            </ul>
+            <label for="lang_select">
+                <select name="lang_select" id="lang_select">
+                <option>en	English</option>
+                <option>ceb	Sinugboanong Binisaya</option>
+                <option>sv	Svenska</option>
+                <option>de	Deutsch</option>
+                <option>fr	Français</option>
+                <option>nl	Nederlands</option>
+                <option>ru	Русский</option>
+                <option>it	Italiano</option>
+                <option>es	Español</option>
+                <option>war	Winaray</option>
+                <option>pl	Polski</option>
+                <option>vi	Tiếng Việt</option>
+                <option>ja	日本語</option>
+                <option>pt	Português</option>
+                <option>zh	中文</option>
+                <option>uk	Українська</option>
+                <option>fa	فارسی</option>
+                <option>sr	Српски / Srpski</option>
+                <option>ca	Català</option>
+                <option>ar	العربية</option>
+                <option>no	Norsk (Bokmål)</option>
+                <option>sh	Srpskohrvatski / Српскохрватски</option>
+                <option>fi	Suomi</option>
+                <option>hu	Magyar</option>
+                <option>id	Bahasa Indonesia</option>
+                <option>ko	한국어</option>
+                <option>cs	Čeština</option>
+                <option>ro	Română</option>
+                <option>ms	Bahasa Melayu</option>
+                <option>tr	Türkçe</option>
+                <option>eu	Euskara</option>
+                <option>eo	Esperanto</option>
+                <option>bg	Български</option>
+                <option>hy	Հայերեն</option>
+                <option>da	Dansk</option>
+                <option>zh-min-nan	Bân-lâm-gú</option>
+                <option>sk	Slovenčina</option>
+                <option>min	Minangkabau</option>
+                <option>kk	Қазақша</option>
+                <option>he	עברית</option>
+                <option>lt	Lietuvių</option>
+                <option>hr	Hrvatski</option>
+                <option>et	Eesti</option>
+                <option>ce	Нохчийн</option>
+                <option>sl	Slovenščina</option>
+                <option>be	Беларуская</option>
+                <option>gl	Galego</option>
+                <option>el	Ελληνικά</option>
+                <option>nn	Nynorsk</option>
+                <option>simple	Simple English</option>
+                <option>az	Azərbaycanca</option>
+                <option>uz	O‘zbek</option>
+                <option>la	Latina</option>
+                <option>ur	اردو</option>
+                <option>hi	हिन्दी</option>
+                <option>th	ไทย</option>
+                <option>vo	Volapük</option>
+                <option>ka	ქართული</option>
+                <option>ta	தமிழ்</option>
+                <option>cy	Cymraeg</option>
+                <option>tg	Тоҷикӣ</option>
+                <option>mk	Македонски</option>
+                <option>tl	Tagalog</option>
+                <option>mg	Malagasy</option>
+                <option>oc	Occitan</option>
+                <option>lv	Latviešu</option>
+                <option>ky	Кыргызча</option>
+                <option>bs	Bosanski</option>
+                <option>tt	Tatarça / Татарча</option>
+                <option>new	नेपाल भाषा</option>
+                <option>sq	Shqip</option>
+                <option>te	తెలుగు</option>
+                <option>pms	Piemontèis</option>
+                <option>zh-yue	粵語</option>
+                <option>br	Brezhoneg</option>
+                <option>be-x-old	Беларуская (тарашкевіца)</option>
+                <option>azb	تۆرکجه</option>
+                <option>ast	Asturianu</option>
+                <option>bn	বাংলা</option>
+                <option>ml	മലയാളം</option>
+                <option>ht	Krèyol ayisyen</option>
+                <option>jv	Basa Jawa</option>
+                <option>lb	Lëtzebuergesch</option>
+                <option>mr	मराठी</option>
+                <option>sco	Scots</option>
+                <option>af	Afrikaans</option>
+                <option>ga	Gaeilge</option>
+                <option>pnb	شاہ مکھی پنجابی (Shāhmukhī Pañjābī)</option>
+                <option>is	Íslenska</option>
+                <option>ba	Башҡорт</option>
+                <option>cv	Чăваш</option>
+                <option>fy	Frysk</option>
+                <option>su	Basa Sunda</option>
+                <option>sw	Kiswahili</option>
+                <option>my	မြန်မာဘာသာ</option>
+                <option>lmo	Lumbaart</option>
+                <option>an	Aragonés</option>
+                <option>yo	Yorùbá</option>
+                <option>ne	नेपाली</option>
+                <option>pa	ਪੰਜਾਬੀ</option>
+                <option>gu	ગુજરાતી</option>
+                <option>io	Ido</option>
+                <option>nds	Plattdüütsch</option>
+                <option>scn	Sicilianu</option>
+                <option>bpy	ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী</option>
+                <option>als	Alemannisch</option>
+                <option>bar	Boarisch</option>
+                <option>ku	Kurdî / كوردی</option>
+                <option>kn	ಕನ್ನಡ</option>
+                <option>ckb	Soranî / کوردی</option>
+                <option>ia	Interlingua</option>
+                <option>qu	Runa Simi</option>
+                <option>mn	Монгол</option>
+                <option>arz	مصرى (Maṣri)</option>
+                <option>bat-smg	Žemaitėška</option>
+                <option>gd	Gàidhlig</option>
+                <option>wa	Walon</option>
+                <option>nap	Nnapulitano</option>
+                <option>si	සිංහල</option>
+                <option>yi	ייִדיש</option>
+                <option>bug	Basa Ugi</option>
+                <option>am	አማርኛ</option>
+                <option>cdo	Mìng-dĕ̤ng-ngṳ̄</option>
+                <option>or	ଓଡ଼ିଆ</option>
+                <option>map-bms	Basa Banyumasan</option>
+                <option>fo	Føroyskt</option>
+                <option>mzn	مَزِروني</option>
+                <option>hsb	Hornjoserbsce</option>
+                <option>xmf	მარგალური (Margaluri)</option>
+                <option>mai	मैथिली</option>
+                <option>li	Limburgs</option>
+                <option>sah	Саха тыла (Saxa Tyla)</option>
+                <option>sa	संस्कृतम्</option>
+                <option>vec	Vèneto</option>
+                <option>ilo	Ilokano</option>
+                <option>os	Иронау</option>
+                <option>mrj	Кырык Мары (Kyryk Mary)</option>
+                <option>hif	Fiji Hindi</option>
+                <option>mhr	Олык Марий (Olyk Marij)</option>
+                <option>bh	भोजपुरी</option>
+                <option>eml	Emiliàn e rumagnòl</option>
+                <option>roa-tara	Tarandíne</option>
+                <option>ps	پښتو</option>
+                <option>diq	Zazaki</option>
+                <option>pam	Kapampangan</option>
+                <option>sd	سنڌي، سندھی ، सिन्ध</option>
+                <option>hak	Hak-kâ-fa / 客家話</option>
+                <option>nso	Sepedi</option>
+                <option>se	Sámegiella</option>
+                <option>zh-classical	古文 / 文言文</option>
+                <option>bcl	Bikol</option>
+                <option>ace	Bahsa Acèh</option>
+                <option>mi	Māori</option>
+                <option>nah	Nāhuatl</option>
+                <option>nds-nl	Nedersaksisch</option>
+                <option>szl	Ślůnski</option>
+                <option>wuu	吴语</option>
+                <option>gan	贛語</option>
+                <option>rue	Русиньскый</option>
+                <option>frr	Nordfriisk</option>
+                <option>vls	West-Vlams</option>
+                <option>km	ភាសាខ្មែរ</option>
+                <option>bo	བོད་སྐད</option>
+                <option>vep	Vepsän</option>
+                <option>glk	گیلکی</option>
+                <option>sc	Sardu</option>
+                <option>crh	Qırımtatarca</option>
+                <option>fiu-vro	Võro</option>
+                <option>co	Corsu</option>
+                <option>lrc	لۊری شومالی</option>
+                <option>tk	تركمن / Туркмен</option>
+                <option>kv	Коми</option>
+                <option>csb	Kaszëbsczi</option>
+                <option>gv	Gaelg</option>
+                <option>as	অসমীয়া</option>
+                <option>myv	Эрзянь (Erzjanj Kelj)</option>
+                <option>lad	Dzhudezmo</option>
+                <option>so	Soomaali</option>
+                <option>zea	Zeêuws</option>
+                <option>nv	Diné bizaad</option>
+                <option>ay	Aymar</option>
+                <option>udm	Удмурт кыл</option>
+                <option>lez	Лезги чІал (Lezgi č’al)</option>
+                <option>ie	Interlingue</option>
+                <option>stq	Seeltersk</option>
+                <option>kw	Kernewek/Karnuack</option>
+                <option>nrm	Nouormand/Normaund</option>
+                <option>pcd	Picard</option>
+                <option>mwl	Mirandés</option>
+                <option>rm	Rumantsch</option>
+                <option>koi	Перем Коми (Perem Komi)</option>
+                <option>ab	Аҧсуа</option>
+                <option>gom	गोंयची कोंकणी / Gõychi Konknni</option>
+                <option>ug	ئۇيغۇر تىلى</option>
+                <option>lij	Líguru</option>
+                <option>cbk-zam	Chavacano de Zamboanga</option>
+                <option>gn	Avañe'ẽ mt	Malti</option>
+                <option>fur	Furlan</option>
+                <option>dsb	Dolnoserbski</option>
+                <option>sn	chiShona</option>
+                <option>dv	ދިވެހިބަސް</option>
+                <option>ang	Englisc</option>
+                <option>ln	Lingala</option>
+                <option>ext	Estremeñu</option>
+                <option>kab	Taqbaylit</option>
+                <option>ksh	Ripoarisch</option>
+                <option>frp	Arpitan</option>
+                <option>lo	ລາວ</option>
+                <option>gag	Gagauz</option>
+                <option>dty	Doteli</option>
+                <option>pag	Pangasinan</option>
+                <option>pi	पाऴि</option>
+                <option>olo	Karjalan</option>
+                <option>av	Авар</option>
+                <option>xal	Хальмг</option>
+                <option>pfl	Pälzisch</option>
+                <option>bxr	Буряад</option>
+                <option>haw	Hawai`i</option>
+                <option>krc	Къарачай-Малкъар (Qarachay-Malqar)</option>
+                <option>pap	Papiamentu</option>
+                <option>kaa	Qaraqalpaqsha</option>
+                <option>rw	Ikinyarwanda</option>
+                <option>pdc	Deitsch</option>
+                <option>bjn	Bahasa Banjar</option>
+                <option>to	faka Tonga</option>
+                <option>nov	Novial</option>
+                <option>ha	هَوُسَ</option>
+                <option>kl	Kalaallisut</option>
+                <option>arc	ܐܪܡܝܐ</option>
+                <option>jam	Jumiekan Kryuol</option>
+                <option>kbd	Адыгэбзэ (Adighabze)</option>
+                <option>tyv	Тыва</option>
+                <option>tpi	Tok Pisin</option>
+                <option>tet	Tetun</option>
+                <option>ig	Igbo</option>
+                <option>ki	Gĩkũyũ</option>
+                <option>na	dorerin Naoero</option>
+                <option>roa-rup	Armãneashce</option>
+                <option>lbe	Лакку</option>
+                <option>jbo	Lojban</option>
+                <option>ty	Reo Mā`ohi</option>
+                <option>mdf	Мокшень (Mokshanj Kälj)</option>
+                <option>za	Cuengh</option>
+                <option>kg	KiKongo</option>
+                <option>lg	Luganda</option>
+                <option>wo	Wolof</option>
+                <option>bi	Bislama</option>
+                <option>srn	Sranantongo</option>
+                <option>tcy	ತುಳು</option>
+                <option>zu	isiZulu</option>
+                <option>chr	ᏣᎳᎩ</option>
+                <option>kbp	Kabiye</option>
+                <option>ltg	Latgaļu</option>
+                <option>sm	Gagana Samoa</option>
+                <option>om	Oromoo</option>
+                <option>xh	isiXhosa</option>
+                <option>rmy	romani - रोमानी</option>
+                <option>tn	Setswana</option>
+                <option>cu	Словѣньскъ</option>
+                <option>pih	Norfuk</option>
+                <option>rn	Kirundi</option>
+                <option>chy	Tsetsêhestâhese</option>
+                <option>tw	Twi</option>
+                <option>tum	chiTumbuka</option>
+                <option>ts	Xitsonga</option>
+                <option>st	Sesotho</option>
+                <option>got	𐌲𐌿𐍄𐌹𐍃𐌺</option>
+                <option>pnt	Ποντιακά</option>
+                <option>ss	SiSwati</option>
+                <option>ch	Chamoru</option>
+                <option>bm	Bamanankan</option>
+                <option>fj	Na Vosa Vakaviti</option>
+                <option>ady	Адыгэбзэ</option>
+                <option>iu	ᐃᓄᒃᑎᑐᑦ</option>
+                <option>ny	Chichewa</option>
+                <option>atj	Atikamekw</option>
+                <option>ee	Eʋegbe</option>
+                <option>ks	कश्मीरी / كشميري</option>
+                <option>ak	Akana</option>
+                <option>ik	Iñupiak</option>
+                <option>ve	Tshivenda</option>
+                <option>sg	Sängö</option>
+                <option>ff	Fulfulde</option>
+                <option>dz	ཇོང་ཁ</option>
+                <option>ti	ትግርኛ</option>
+                <option>cr	Nehiyaw</option>
+                <option>din	Dinka</option>
+                <option>ng	Oshiwambo</option>
+                <option>cho	Choctaw</option>
+                <option>kj	Kuanyama</option>
+                <option>mh	Ebon</option>
+                <option>ho	Hiri Motu</option>
+                <option>ii	ꆇꉙ</option>
+                <option>aa	Afar</option>
+                <option>mus	Muskogee</option>
+                <option>hz	Otsiherero</option>
+                <option>kr	Kanuri</option>
+            </select>
+            </label>
+            <label>
+                <select name="langLevel">
+                    <option>Basic</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                    <option>Maternal Language</option>
+                </select>
+            </label>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="togglelang()">Cancel</button>
+            <button type="submit" id="submitlang" name="submitgrade">Add language</button>
+        </div>
+    </form>
+
+    <form action="/update_aboutme/{{ userStudent.id }}" id="popupaboutme" method="POST">
+        <h3>About me</h3>
+        <div id="aboutme_">
+            <h6>About me</h6>
+            <label for="aboutmeTxt"><textarea name="aboutmeTxt" id="aboutmeTxt">{{userStudent.aboutme}}</textarea></label>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleabout()">Cancel</button>
+            <button type="submit" id="submitaboutme" name="submitaboutme">Modify Profile</button>
+        </div>
+    </form>
+
+    <form action="/update_experience/{{ userStudent.id }}" id="popupexperience" method="POST">
+        <h3>Add Experience</h3>
+        <div id="exp_">
+            <div id="expyear">
+                <input type="date" id="startexp" name="startexp">
+                <input type="date" id="finishexp" name="finishexp">
+                <input type="checkbox" id="ongoingexp" name="ongoingexp" onclick="EnableDisableexp(this)">
+            </div>
+            <div id="expposition">
+                <input id="position_" name="position_">
+            </div>
+            <div id="expcompany">
+                <input type="text" id="company_" name="company_">
+            </div>
+            <div id="expdescription">
+                <textarea type="text" id="description_" name="description_"></textarea>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleexp()">Cancel</button>
+            <button type="submit" id="submitexp" name="submitgrade">Add Experience</button>
+        </div>
+    </form>
+
+    <form id="popupexperienceEdit" method="POST">
+        <h3>EDIT</h3>
+        <div>
+            <div >
+                <input type="date" id="startexp_edit" name="startexp_edit">
+                <input type="date" id="finishexp_edit" name="finishexp_edit">
+                <input type="checkbox" id="ongoingexpEdit" name="ongoingexp_edit">
+            </div>
+            <div>
+                <input type="text" id="position_edit" name="position__edit">
+            </div>
+            <div>
+                <input type="text" id="company_edit" name="company__edit">
+            </div>
+            <div>
+                <textarea id="description_edit" name="description__edit"></textarea>
+            </div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleexpEdit()">Cancel</button>
+            <button type="submit" id="submitexpedit" name="submitgrade">Edit Experience</button>
+        </div>
+    </form>
+
+    <form action="/add_skills/{{ userStudent.id }}" id="popupskills" method="POST">
+        <h3>Skills</h3>
+        <div id="skills_">
+            <h6>Skills</h6>
+            <ul>
+                <li></li>
+            </ul>
+            <label for="skills_select">
+                <select name="skills_select" id="skills_select">
+                    <option>html</option>
+                    <option>Pyhon</option>
+                    <option>javascript</option>
+                    <option>Java</option>
+                    <option>CSS</option>
+                    <option>C++</option>
+                </select>
+            </label>
+            <label for="skillLevel">
+                <select name="skillLevel" id="skillLevel">
+                <option>Basic</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+                <option>Maternal Language</option>
+                </select>
+            </label>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="toggleskills()">Cancel</button>
+            <button type="submit" id="submitskills" name="submitgrade">Add Skill</button>
+        </div>
+    </form>
+
+    <form action="/add_hobbies/{{ userStudent.id }}" id="popuphobbies" method="POST">
+        <h3>Hobbies</h3>
+        <div class="hobbie">
+            <h6>hobbie</h6>
+            <label for="hobbie_select">
+                <select name="hobbie_select" id="hobbie_select">
+                <option selected disabled>hobby</option>
+                <option>3D printing</option>
+                <option>amateur radio</option>
+                <option>scrapbook</option>
+                <option>Amateur radio</option>
+                <option>Acting</option>
+                <option>Baton twirling</option>
+                <option>Board games</option>
+                <option>Book restoration</option>
+                <option>Cabaret</option>
+                <option>Calligraphy</option>
+                <option>Candle making</option>
+                <option>Computer programming</option>
+                <option>Coffee roasting</option>
+                <option>Cooking</option>
+                <option>Coloring</option>
+                <option>Cosplaying</option>
+                <option>Couponing</option>
+                <option>Creative writing</option>
+                <option>Crocheting</option>
+                <option>Cryptography</option>
+                <option>Dance</option>
+                <option>Digital arts</option>
+                <option>Drama</option>
+                <option>Drawing</option>
+                <option>Do it yourself</option>
+                <option>Electronics</option>
+                <option>Embroidery</option>
+                <option>Fashion</option>
+                <option>Flower arranging</option>
+                <option>Foreign language learning</option>
+                <option>Gaming</option>
+                <option>tabletop games</option>
+                <option>role-playing games</option>
+                <option>Gambling</option>
+                <option>Genealogy</option>
+                <option>Glassblowing</option>
+                <option>Gunsmithing</option>
+                <option>Homebrewing</option>
+                <option>Ice skating</option>
+                <option>Jewelry making</option>
+                <option>Jigsaw puzzles</option>
+                <option>Juggling</option>
+                <option>Knapping</option>
+                <option>Knitting</option>
+                <option>Kabaddi</option>
+                <option>Knife making</option>
+                <option>Lacemaking</option>
+                <option>Lapidary</option>
+                <option>Leather crafting</option>
+                <option>Lego building</option>
+                <option>Lockpicking</option>
+                <option>Machining</option>
+                <option>Macrame</option>
+                <option>Metalworking</option>
+                <option>Magic</option>
+                <option>Model building</option>
+                <option>Listening to music</option>
+                <option>Origami</option>
+                <option>Painting</option>
+                <option>Playing musical instruments</option>
+                <option>Pet</option>
+                <option>Poi</option>
+                <option>Pottery</option>
+                <option>Puzzles</option>
+                <option>Quilting</option>
+                <option>Reading</option>
+                <option>Scrapbooking</option>
+                <option>Sculpting</option>
+                <option>Sewing</option>
+                <option>Singing</option>
+                <option>Sketching</option>
+                <option>Soapmaking</option>
+                <option>Sports</option>
+                <option>Stand-up comedy</option>
+                <option>Sudoku</option>
+                <option>Table tennis</option>
+                <option>Taxidermy</option>
+                <option>Video gaming</option>
+                <option>Watching movies</option>
+                <option>Web surfing</option>
+                <option>Whittling</option>
+                <option>Wood carving</option>
+                <option>Woodworking</option>
+                <option>Worldbuilding</option>
+                <option>Writing</option>
+                <option>Yoga</option>
+                <option>Yo-yoing</option>
+                <option>Air sports</option>
+                <option>Archery</option>
+                <option>Astronomy</option>
+                <option>Backpacking</option>
+                <option>BASE jumping</option>
+                <option>Baseball</option>
+                <option>Basketball</option>
+                <option>Beekeeping</option>
+                <option>Bird watching</option>
+                <option>Blacksmithing</option>
+                <option>Board sports</option>
+                <option>Bodybuilding</option>
+                <option>Brazilian jiu-jitsu</option>
+                <option>Community</option>
+                <option>Cycling</option>
+                <option>Dowsing</option>
+                <option>Driving</option>
+                <option>Fishing</option>
+                <option>Flag Football</option>
+                <option>Flying</option>
+                <option>Flying disc</option>
+                <option>Foraging</option>
+                <option>Gardening</option>
+                <option>Geocaching</option>
+                <option>Ghost hunting</option>
+                <option>Graffiti</option>
+                <option>Handball</option>
+                <option>Hiking</option>
+                <option>Hooping</option>
+                <option>Horseback riding</option>
+                <option>Hunting</option>
+                <option>Inline skating</option>
+                <option>Jogging</option>
+                <option>Kayaking</option>
+                <option>Kite flying</option>
+                <option>Kitesurfing</option>
+                <option>LARPing</option>
+                <option>Letterboxing</option>
+                <option>Metal detecting</option>
+                <option>Motor sports</option>
+                <option>Mountain biking</option>
+                <option>Mountaineering</option>
+                <option>Mushroom hunting</option>
+                <option>Mycology</option>
+                <option>Netball</option>
+                <option>Nordic skating</option>
+                <option>Orienteering</option>
+                <option>Paintball</option>
+                <option>Parkour</option>
+                <option>Photography</option>
+                <option>Polo</option>
+                <option>Rafting</option>
+                <option>Rappelling</option>
+                <option>Rock climbing</option>
+                <option>Roller skating</option>
+                <option>Rugby</option>
+                <option>Running</option>
+                <option>Sailing</option>
+                <option>Sand art</option>
+                <option>Scouting</option>
+                <option>Scuba diving</option>
+                <option>Sculling</option>
+                <option>Rowing</option>
+                <option>Shooting</option>
+                <option>Shopping</option>
+                <option>Skateboarding</option>
+                <option>Skiing</option>
+                <option>Skimboarding</option>
+                <option>Skydiving</option>
+                <option>Slacklining</option>
+                <option>Snowboarding</option>
+                <option>Stone skipping</option>
+                <option>Surfing</option>
+                <option>Swimming</option>
+                <option>Taekwondo</option>
+                <option>Tai chi</option>
+                <option>Urban exploration</option>
+                <option>Vacation</option>
+                <option>Vehicle restoration</option>
+                <option>Water sports</option>
+            </select>
+            </label>
+        </div>
+        <div class="buttons">
+            <button type="button" class="cancelBtn" name="cancelBtn" onclick="togglehobbies()">Cancel</button>
+            <button type="submit" id="submithobbie" name="submitgrade">Add hobbie</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %} Profil Companie {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+    <h3 align="center">Profil {{userCompanie.nume_companie}}</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Username: </th>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Denumire companie: </th>
+            <td>{{userCompanie.nume_companie}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Adresa: </th>
+            <td>{{userCompanie.adresa}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Adresa web: </th>
+            <td>{{userCompanie.adresa_web}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Telefon: </th>
+            <td>{{userCompanie.telefon}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Descriere companie: </th>
+            <td>{{userCompanie.descriere_companie}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Logo: </th>
+            <td>{{userCompanie.nume_fisier}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="{{url_for('updateProfilCompanie', id=userCompanie.id)}}" type="submit" class="btn btn-primary">Modifica profil</a>
+      <a href="{{url_for('delete', id=current_user.id)}}" type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Remove?');">Sterge utilizator</a>
+      <a href="{{url_for('dashboard', id=userCompanie.id)}}" type="submit" class="btn btn-primary">Dashboard</a>
+    </div>
+
+
+{% endblock %}

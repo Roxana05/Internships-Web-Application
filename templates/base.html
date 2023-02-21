@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/css/style_base.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style_cv_1.css">
+    <link rel="stylesheet" href="../static/css/style_home.css">
+    <link rel="stylesheet" href="../static/css/style_signup.css">
+    <link rel="stylesheet" href="/static/css/all.css">
+    <link rel="stylesheet" href="/static/css/fontawesome.css">
+    <link rel="stylesheet" href="/static/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/StyleJobDescription.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHFGJvOvKxVfELGroFkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/fontawesome.min.css">
+    <title>{% block title %} Home {% endblock %}</title>
+</head>
+<body>
+
+    <div id="wrap">
+        <nav>
+            <div class="logo"><a href="/"><img id="nav_logo" src="../static/images/logoUVT.png" alt=""></a></div>
+            <button type="button" class="btn-hamburger" data-action="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li class="redirect"><a href="/" id="home">HOME</a></li>
+                <li class="redirect"><a href="/parteneri" id="parteneri">PARTENERI</a></li>
+                <li class="redirect"><a href="/internshipuri" id="internshipuri">INTERSHIPURI</a></li>
+                <li class="redirect"><a href="/noutati" id="noutati">NOUTATI</a></li>
+                <li class="redirect"><a href="/galerie" id="galerie">GALERIE</a></li>
+                <li class="redirect"><a href="/activitati" id="activitati">ACTIVITATI</a></li>
+                <li class="redirect"><a href="/contact" id="contact">CONTACT</a></li>
+                <li class="redirect dropdown">
+                    <a class="user_icon"  data-action="dropdown-toggle"><img src="/static/images/user-solid-24.png" alt=""></a>
+                    <div class="dropdown_menu">
+                        {% if current_user.is_authenticated%}
+                            <a class="dropdown_item" href="/profil">Profil</a> <br>
+                            <a  class="dropdown_item" href="/logout">Logout</a>
+                        {% else %}
+                            <a  class="dropdown_item" href="/login">Login</a> <br>
+                            <a  class="dropdown_item" href="/signup">Sign Up</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'error' %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                        {{message}}
+                        <button type="button" class = "close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                        {{message}}
+                        <button type="button" class = "btn-close" data-dismiss="alert"></button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="base_container" id="basecontainer">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer_col">
+                <img src="../static/images/Logo UVT - 2017-20-fococlipping-standard.png" alt="">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer_col">
+                <h4>Despre UVT</h4>
+                <ul class="footer_col_items">
+                    <li><a href="#">Scurt Istoric</a></li>
+                    <li><a href="#">De ce este UVT altfel</a></li>
+                    <li><a href="#">Clasamente Internationale</a></li>
+                    <li><a href="#">Harta UVT</a></li>
+                </ul>
+            </div>
+            <div class="footer_col">
+                <h4>Contact</h4>
+                <ul class="footer_col_items">
+                    <li><a href="#">Scurt Istoric</a></li>
+                    <li><a href="#">De ce este UVT altfel</a></li>
+                    <li><a href="#">Clasamente Internationale</a></li>
+                    <li><a href="#">Harta UVT</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!--========== SCROLL TOP ==========-->
+        
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class='bx bx-up-arrow-alt scrolltop_icon'></i>
+    </a>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+    ></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../static/js/index.js"></script>
+    <!-- <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script> -->
+    <!-- <script type="text/javascript" src="../node_modules/boxicons/dist/boxicons.js"></script> -->
+    <script type="text/javascript" src="../static/js/cv.js"></script>
+    <script type="text/javascript" src="../static/js/html2pdf.bundle.min.js"></script>
+    
+</body>
+</html>

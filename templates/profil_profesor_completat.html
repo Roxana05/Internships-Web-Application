@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %} Profil Student {% endblock %}
+
+{% block content %} 
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  
+{% endfor %}
+
+    <h3 align="center">Profil {{userProfesor.nume}} {{userProfesor.prenume}}</h3>
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Username: </th>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Nume: </th>
+            <td>{{userProfesor.nume}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Prenume: </th>
+            <td>{{userProfesor.prenume}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Facultatea: </th>
+            <td>{{userProfesor.facultatea}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email: </th>
+            <td>{{user.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="{{url_for('updateProfilProfesor', id=userProfesor.id)}}" type="submit" class="btn btn-primary">Modifica profil</a>
+      <a href="{{url_for('delete', id=current_user.id)}}" type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Remove?');">Sterge utilizator</a>
+    </div>
+
+
+{% endblock %}
